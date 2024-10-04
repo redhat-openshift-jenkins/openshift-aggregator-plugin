@@ -1,0 +1,5 @@
+configuration-as-code:1850.va_a_8c31d3158b_
+job-dsl:1.87
+maven-plugin:3.23
+openshift-aggregator:latest:file:///usr/share/jenkins/ref/openshift-aggregator.hpi
+workflow-aggregator:596.v8c21c963d92d

@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    A suite of plugins for running Jenkins on top of OpenShift Container Platform.
+</div>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2024 Red Hat, Inc.
+
+SPDX-License-Identifier: Apache-2.0
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>plugin</artifactId>
+    <version>4.85</version>
+    <relativePath />
+  </parent>
+
+  <groupId>com.redhat.openshift.jenkins.plugins</groupId>
+  <artifactId>openshift-aggregator</artifactId>
+  <version>${revision}${changelist}</version>
+  <packaging>hpi</packaging>
+
+  <name>Red Hat OpenShift Jenkins Plugin</name>
+  <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+  <licenses>
+    <license>
+      <name>Apache 2.0 License</name>
+      <url>https://opensource.org/license/apache-2-0/</url>
+    </license>
+  </licenses>
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+    <connection>scm:git:https://github.com/${gitHubRepo}</connection>
+    <developerConnection>scm:git:https://github.com/${gitHubRepo}</developerConnection>
+    <tag>${scmTag}</tag>
+    <url>https://github.com/${gitHubRepo}</url>
+  </scm>
+
+  <properties>
+    <revision>1.0</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+    <jenkins.version>2.426.2</jenkins.version>
+    <gitHubRepo>redhat-openshift-jenkins/${project.artifactId}-plugin</gitHubRepo>
+
+    <spotless.check.skip>false</spotless.check.skip>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.jenkins.tools.bom</groupId>
+        <artifactId>bom-2.426.x</artifactId>
+        <version>2705.vf5c48c31285b_</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Pinned Plugin Dependencies -->
+      <!-- Non-OpenShift ones should be in the "bom-pom", but the base version has reached EOL -->
+      <!-- Notable dependency outside of bom-pom: jackson-core -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.16.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.openshift.jenkins.plugins</groupId>
+        <artifactId>openshift-client</artifactId>
+        <version>1.1.0.424.v829cb_ccf8798</version>
+      </dependency>
+      <dependency>
+        <groupId>io.fabric8.jenkins.plugins</groupId>
+        <artifactId>openshift-sync</artifactId>
+        <version>1.1.0.802.v45585f8cdc07</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jenkins.blueocean</groupId>
+        <artifactId>blueocean-rest</artifactId>
+        <version>1.27.9</version>
+      </dependency>
+      <dependency>
+        <groupId>org.csanchez.jenkins.plugins</groupId>
+        <artifactId>kubernetes</artifactId>
+        <version>4174.v4230d0ccd951</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>credentials</artifactId>
+        <version>1311.vcf0a_900b_37c2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>git</artifactId>
+        <version>5.2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>script-security</artifactId>
+        <version>1313.v7a_6067dc7087</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins.pipeline-stage-view</groupId>
+        <artifactId>pipeline-rest-api</artifactId>
+        <version>2.34</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+        <artifactId>workflow-cps</artifactId>
+        <version>3837.v305192405b_c0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+        <artifactId>workflow-multibranch</artifactId>
+        <version>773.vc4fe1378f1d5</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+        <artifactId>workflow-step-api</artifactId>
+        <version>639.v6eca_cd8c04a_a_</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+        <artifactId>workflow-support</artifactId>
+        <version>865.v43e78cc44e0d</version>
+      </dependency>
+      <dependency>
+        <groupId>org.openshift.jenkins</groupId>
+        <artifactId>openshift-login</artifactId>
+        <version>1.1.0.248.v1908df5c4f5e</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>command-launcher</artifactId>
+        <version>100.v2f6722292ee8</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.openshift.jenkins.plugins</groupId>
+      <artifactId>openshift-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.fabric8.jenkins.plugins</groupId>
+      <artifactId>openshift-sync</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.csanchez.jenkins.plugins</groupId>
+      <artifactId>kubernetes</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openshift.jenkins</groupId>
+      <artifactId>openshift-login</artifactId>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
