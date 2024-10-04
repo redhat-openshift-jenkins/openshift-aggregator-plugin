@@ -38,7 +38,7 @@ It is only meant to be used within a container running Jenkins on top of an Open
    each OpenShift plugin:
 
    ```sh
-   helm install jenkins jenkins/jenkins -f helm/values.yaml -f helm/values-login.yaml
+   helm install jenkins jenkins/jenkins -f helm/values.yaml -f helm/values-login.yaml -f helm/values-client.yaml
 
 ## Issues
 

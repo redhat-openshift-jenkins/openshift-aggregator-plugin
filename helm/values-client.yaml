@@ -1,0 +1,27 @@
+# Helm values for enabling the OpenShift Client plugin
+controller:
+  JCasC:
+    configScripts:
+      openshift-client: |-
+        # Set a default location for the oc binary, using special Jenkins ENVVAR+EXTRA syntax
+        # TODO: make the version of oc configurable in our own Helm chart
+        jenkins:
+          nodeProperties:
+            - envVars:
+                env:
+                  - key: "PATH+OC"
+                    value: "/usr/share/openshift/bin/oc-4.16"
+        # Configure Jenkins tools to point to specific versions of oc
+        tool:
+          oc:
+            installations:
+              - name: oc-4.17
+                home: /usr/share/openshift/bin/oc-4.17
+              - name: oc-4.16
+                home: /usr/share/openshift/bin/oc-4.16
+              - name: oc-4.15
+                home: /usr/share/openshift/bin/oc-4.15
+              - name: oc-4.14
+                home: /usr/share/openshift/bin/oc-4.14
+              - name: oc-4.12
+                home: /usr/share/openshift/bin/oc-4.12
