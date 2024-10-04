@@ -119,7 +119,7 @@ SPDX-License-Identifier: Apache-2.0
       <dependency>
         <groupId>org.jenkins-ci.plugins.workflow</groupId>
         <artifactId>workflow-support</artifactId>
-        <version>865.v43e78cc44e0d</version>
+        <version>926.v9f4f9b_b_98c19</version>
       </dependency>
       <dependency>
         <groupId>org.openshift.jenkins</groupId>
