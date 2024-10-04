@@ -7,38 +7,28 @@ It is only meant to be used within a container running Jenkins on top of an Open
 
 ## Getting started
 
-1. Build the container image using your container engine of choice, and push it to a container
-   registry of your choice. `podman` and `quay.io` are used as examples below:
+1. If you have not done so already, create a Project in OpenShift to deploy your Jenkins instance.
 
    ```sh
-   podman build -t quay.io/<your-username>/openshift-jenkins:latest -f .konflux/Containerfile .
-   podman push quay.io/<your-username>/openshift-jenkins:latest
-   ```
-
-2. If you have not done so already, create a Project in OpenShift to deploy your Jenkins instance.
-
-   ```
    oc new-project jenkins
    ```
 
-3. In `helm/values.yaml`, make the following changes:
+2. In `helm/values.yaml`, update `controller.jenkinsUrl` to match the expected ingress created by
+   the `Route`. The default value assumes deployment on OpenShift Local.
 
-   1. Update `controller.image` to point to the image you built above.
-   2. Update `controller.jenkinsUrl` to match the expected ingress created by the `Route`. The
-      default value here assumes deployment on OpenShift Local.
+3. Apply the additional RBAC that will eventually be used by Jenkins:
 
-4. Apply the additional RBAC that will eventually be used by Jenkins:
-
-   ```
+   ```sh
    oc apply -f helm/00-rbac-sync-plugin.yaml
    ```
 
-5. Follow the Jenkins [helm chart](https://github.com/jenkinsci/helm-charts) instructions to
+4. Follow the Jenkins [helm chart](https://github.com/jenkinsci/helm-charts) instructions to
    install the chart, using your `values.yaml` file and the `values-*.yaml` files that configure
    each OpenShift plugin:
 
    ```sh
    helm install jenkins jenkins/jenkins -f helm/values.yaml -f helm/values-login.yaml -f helm/values-client.yaml
+   ```
 
 ## Issues
 

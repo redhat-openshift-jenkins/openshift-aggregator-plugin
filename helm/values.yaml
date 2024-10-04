@@ -8,8 +8,8 @@ agent:
 controller:
   image:
     registry: quay.io
-    repository: adambkaplan/openshift-jenkins
-    tag: 2.462-konflux-2
+    repository: redhat-user-workloads/rh-openshift-builds-tenant/openshift-jenkins-2-462/openshift-aggregator-plugin-2-462
+    tag: a0511956962bfb07e8b37bea2437aefd4f0799fd
   installPlugins: false
   # Needed for OAuth2 plugin - TODO figure out how to get this from route status.
   jenkinsUrl: https://jenkins-jenkins.apps-crc.testing
