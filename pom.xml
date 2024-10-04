@@ -79,7 +79,7 @@ SPDX-License-Identifier: Apache-2.0
       <dependency>
         <groupId>org.csanchez.jenkins.plugins</groupId>
         <artifactId>kubernetes</artifactId>
-        <version>4174.v4230d0ccd951</version>
+        <version>4290.v93ea_4b_b_26a_61</version>
       </dependency>
       <dependency>
         <groupId>org.jenkins-ci.plugins</groupId>
