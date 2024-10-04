@@ -1,0 +1,54 @@
+agent:
+  enabled: true
+  image:
+    repository: quay.io/redhat-user-workloads/rh-openshift-builds-tenant/openshift-jenkins-2-462/jenkinsci-docker-agent-2-462
+    tag: "latest@sha256:5c917185db5918391b7be0fadcd9314fa5df4856fc046fb0ceb98a1c0ce32eb5"
+controller:
+  image:
+    registry: quay.io
+    repository: adambkaplan/openshift-jenkins
+    tag: 2.462-konflux
+  installPlugins: false
+  JCasC:
+    authorizationStrategy: |-
+      globalMatrix:
+        permissions:
+          - "Overall/Administer:admin"
+          - "Overall/Read:admin"
+          - "Job/Build:admin"
+          - "Job/Configure:admin"
+          - "Job/Create:admin"
+          - "Job/Delete:admin"
+          - "Job/Read:admin"
+          - "Job/Workspace:admin"
+          - "Run/Delete:admin"
+          - "Run/Update:admin"
+          - "SCM/Tag:admin"
+          - "View/Configure:admin"
+          - "View/Create:admin"
+          - "View/Delete:admin"
+    securityRealm: |-
+      openShiftOAuth2: {}
+  # Needed for OAuth2 plugin - TODO figure out how to get this from route status.
+  jenkinsUrl: https://jenkins-jenkins.apps-crc.testing
+  numExecutors: 5
+  overrideArgs:
+    - -pre
+    - "echo 'Starting Jenkins'"
+  prometheus:
+    enabled: false
+  route:
+    enabled: true
+  sidecars:
+    configAutoReload:
+      enabled: false
+# Name overrides needed for oauth-redirectreference
+nameOverride: jenkins
+fullNameOverride: jenkins
+rbac:
+  create: true
+  readSecrets: true
+  useOpenShiftNonRootSCC: true
+serviceAccount:
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirectreference.jenkins: "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"jenkins\"}}"
