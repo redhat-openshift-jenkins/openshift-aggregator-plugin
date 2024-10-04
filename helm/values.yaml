@@ -1,3 +1,5 @@
+# Minimum values for deploying Jenkins with the Helm chart
+# Configuration for specific plugins is found in seprate `values_*.yaml` files
 agent:
   enabled: true
   image:
@@ -7,28 +9,8 @@ controller:
   image:
     registry: quay.io
     repository: adambkaplan/openshift-jenkins
-    tag: 2.462-konflux
+    tag: 2.462-konflux-2
   installPlugins: false
-  JCasC:
-    authorizationStrategy: |-
-      globalMatrix:
-        permissions:
-          - "Overall/Administer:admin"
-          - "Overall/Read:admin"
-          - "Job/Build:admin"
-          - "Job/Configure:admin"
-          - "Job/Create:admin"
-          - "Job/Delete:admin"
-          - "Job/Read:admin"
-          - "Job/Workspace:admin"
-          - "Run/Delete:admin"
-          - "Run/Update:admin"
-          - "SCM/Tag:admin"
-          - "View/Configure:admin"
-          - "View/Create:admin"
-          - "View/Delete:admin"
-    securityRealm: |-
-      openShiftOAuth2: {}
   # Needed for OAuth2 plugin - TODO figure out how to get this from route status.
   jenkinsUrl: https://jenkins-jenkins.apps-crc.testing
   numExecutors: 5
@@ -37,18 +19,10 @@ controller:
     - "echo 'Starting Jenkins'"
   prometheus:
     enabled: false
-  route:
-    enabled: true
   sidecars:
     configAutoReload:
       enabled: false
-# Name overrides needed for oauth-redirectreference
-nameOverride: jenkins
-fullNameOverride: jenkins
 rbac:
   create: true
   readSecrets: true
   useOpenShiftNonRootSCC: true
-serviceAccount:
-  annotations:
-    serviceaccounts.openshift.io/oauth-redirectreference.jenkins: "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"jenkins\"}}"

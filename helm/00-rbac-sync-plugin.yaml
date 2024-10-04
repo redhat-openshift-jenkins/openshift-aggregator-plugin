@@ -1,10 +1,10 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: ocp-jenkins-edit
+  name: jenkins-edit
 subjects:
   - kind: ServiceAccount
-    name: ocp-jenkins
+    name: jenkins
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

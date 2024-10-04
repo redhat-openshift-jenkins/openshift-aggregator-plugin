@@ -34,10 +34,11 @@ It is only meant to be used within a container running Jenkins on top of an Open
    ```
 
 5. Follow the Jenkins [helm chart](https://github.com/jenkinsci/helm-charts) instructions to
-   install the chart, using your `values.yaml` file
+   install the chart, using your `values.yaml` file and the `values-*.yaml` files that configure
+   each OpenShift plugin:
 
    ```sh
-   helm install jenkins jenkins/jenkins -f helm/values.yaml
+   helm install jenkins jenkins/jenkins -f helm/values.yaml -f helm/values-login.yaml
 
 ## Issues
 
