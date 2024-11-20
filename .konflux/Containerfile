@@ -21,8 +21,8 @@ RUN /usr/local/s2i/assemble
 FROM registry.redhat.io/openshift4/ose-cli-rhel9:v4.17 as oc-4.17
 FROM registry.redhat.io/openshift4/ose-cli-rhel9:v4.16 as oc-4.16
 FROM registry.redhat.io/openshift4/ose-cli:v4.15 as oc-4.15
-FROM registry.redhat.io/openshift4/ose-cli:v4.14 as oc-4.14
-FROM registry.redhat.io/openshift4/ose-cli:v4.12 as oc-4.12
+FROM registry.redhat.io/openshift4/ose-cli:v4.15 as oc-4.14
+FROM registry.redhat.io/openshift4/ose-cli:v4.15 as oc-4.12
 
 # Start from base "core controller" image on Konflux
 FROM quay.io/redhat-user-workloads/rh-openshift-builds-tenant/openshift-jenkins-2-462/jenkins-core-controller-2-462@sha256:910cc4f57c8ba10472d08d7edf01f9d32ef5f04c3708b58b2bd49182da90d95e
